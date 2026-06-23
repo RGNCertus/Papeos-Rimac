@@ -518,3 +518,9 @@
 
   .login-card__title { font-size: 1.3rem; }
 }
+
+.login-error[hidden],
+.login-blocked[hidden],
+.login-attempts[hidden] {
+  display: none !important;
+}
