@@ -1,0 +1,400 @@
+/* ============================================================
+   PAPEO'S RÍMAC — dashboard-bar.css
+   Panel de Bar · Púrpura oscuro + dorado + verde
+   ============================================================ */
+
+.dash-bar-body {
+  background: #1A0030;
+}
+
+/* ── Ajuste de secciones para fondo oscuro ── */
+.dash-bar-body .dash-section {
+  background: #1A0030;
+}
+
+.dash-bar-body .dash-section--alt {
+  background: #220040;
+}
+
+.dash-bar-body .section-title {
+  color: #CE93D8;
+}
+
+.dash-bar-body .section-desc {
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── NAVBAR Bar — púrpura profundo ── */
+.navbar--bar {
+  background: linear-gradient(90deg, #1A0030 0%, #4A148C 100%);
+  border-bottom-color: var(--amarillo);
+}
+
+/* ============================================================
+   HERO DE BAR — noche, neón, burbujas
+   ============================================================ */
+.hero-bar {
+  margin-top: var(--navbar-h);
+  min-height: 400px;
+  background: linear-gradient(
+    135deg,
+    #0D001F 0%,
+    #2D0050 40%,
+    #4A148C 80%,
+    #1B5E20 100%
+  );
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brillo de neón inferior */
+.hero-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(253,216,53,0.08), transparent);
+  pointer-events: none;
+}
+
+/* Luces de fondo animadas */
+.hero-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 15% 80%, rgba(74,20,140,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(27,94,32,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(253,216,53,0.06) 0%, transparent 60%);
+  animation: luz-bar 6s ease-in-out infinite alternate;
+}
+
+@keyframes luz-bar {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+/* Burbujas flotantes */
+.bar-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  left: var(--x, 50%);
+  bottom: -30px;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  opacity: 0;
+  animation: burbuja-sube 4s ease-in var(--delay, 0s) infinite;
+}
+
+@keyframes burbuja-sube {
+  0%   { opacity: 0; transform: translateY(0) scale(0.8); }
+  10%  { opacity: 0.35; }
+  80%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-420px) scale(1.2); }
+}
+
+.hero-bar__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--sp-3xl) var(--sp-xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: hero-content-in 0.7s ease both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-bar__content .hero-eyebrow {
+  color: #CE93D8;
+}
+
+.hero-bar__content .kpi-card {
+  background: rgba(74,20,140,0.4);
+  border-color: rgba(206,147,216,0.35);
+}
+
+.hero-bar__content .kpi-card:hover {
+  background: rgba(74,20,140,0.65);
+  border-color: rgba(206,147,216,0.6);
+}
+
+/* ============================================================
+   CARTA DEL DÍA — sección exclusiva bar
+   ============================================================ */
+.carta-bar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sp-md);
+}
+
+.trago-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(206,147,216,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md) var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  transition: all var(--trans-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.trago-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--amarillo), #CE93D8);
+  opacity: 0;
+  transition: opacity var(--trans-base);
+}
+
+.trago-card:hover {
+  background: rgba(255,255,255,0.11);
+  border-color: rgba(206,147,216,0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(74,20,140,0.35);
+}
+
+.trago-card:hover::before { opacity: 1; }
+
+.trago-card--agotado {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.trago-card__emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.trago-card__nombre {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blanco);
+}
+
+.trago-card__desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.trago-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-xs);
+  flex-wrap: wrap;
+}
+
+.trago-precio {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--amarillo);
+  font-family: var(--font-display);
+}
+
+.trago-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.trago-tag--disponible {
+  background: rgba(76,175,80,0.2);
+  color: #A5D6A7;
+  border: 1px solid rgba(76,175,80,0.3);
+}
+
+.trago-tag--agotado {
+  background: rgba(255,152,0,0.2);
+  color: #FFCC02;
+  border: 1px solid rgba(255,152,0,0.3);
+}
+
+/* ============================================================
+   COMPONENTES REUTILIZABLES — override oscuro para bar
+   ============================================================ */
+
+/* Comunicados */
+.dash-bar-body .comunicado-card {
+  background: rgba(255,255,255,0.06);
+  border-left-color: #CE93D8;
+  box-shadow: none;
+}
+
+.dash-bar-body .comunicado-card--importante {
+  border-left-color: #EF9A9A;
+  background: rgba(198,40,40,0.08);
+}
+
+.dash-bar-body .comunicado-card__title {
+  color: rgba(255,255,255,0.92);
+}
+
+.dash-bar-body .comunicado-card__body {
+  color: rgba(255,255,255,0.62);
+}
+
+.dash-bar-body .comunicado-fecha {
+  color: rgba(255,255,255,0.4);
+}
+
+.dash-bar-body .btn-leer-mas {
+  color: #CE93D8;
+}
+
+.dash-bar-body .btn-leer-mas:hover {
+  color: var(--amarillo);
+}
+
+/* Reconocimientos */
+.dash-bar-body .reconoc-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(206,147,216,0.2);
+  box-shadow: none;
+}
+
+.dash-bar-body .reconoc-card::before {
+  background: linear-gradient(90deg, var(--amarillo), #CE93D8);
+}
+
+.dash-bar-body .reconoc-card__nombre {
+  color: var(--blanco);
+}
+
+.dash-bar-body .reconoc-card__motivo {
+  color: rgba(255,255,255,0.65);
+}
+
+.dash-bar-body .reconoc-card:hover {
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(74,20,140,0.4);
+}
+
+/* Ideas */
+.dash-bar-body .idea-form-salon {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(206,147,216,0.25);
+}
+
+.dash-bar-body .idea-textarea {
+  background: rgba(0,0,0,0.3);
+  border-color: rgba(206,147,216,0.3);
+  color: rgba(255,255,255,0.85);
+}
+
+.dash-bar-body .idea-textarea::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.dash-bar-body .idea-textarea:focus {
+  border-color: #CE93D8;
+  box-shadow: 0 0 0 3px rgba(206,147,216,0.18);
+}
+
+.dash-bar-body .idea-char-count {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Encuesta */
+.dash-bar-body .encuesta-form-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(206,147,216,0.25);
+}
+
+.dash-bar-body .encuesta-pregunta__label {
+  color: rgba(255,255,255,0.85);
+}
+
+.dash-bar-body .star-btn {
+  color: rgba(255,255,255,0.2);
+}
+
+.dash-bar-body .star-btn:hover,
+.dash-bar-body .star-btn.active {
+  color: var(--amarillo);
+}
+
+.dash-bar-body .btn-enviar-encuesta {
+  background: linear-gradient(135deg, #6A1B9A, #4A148C);
+}
+
+.dash-bar-body .btn-enviar-encuesta:hover {
+  background: linear-gradient(135deg, #7B1FA2, #6A1B9A);
+}
+
+/* Turno card */
+.dash-bar-body .turno-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(206,147,216,0.2);
+}
+
+.dash-bar-body .turno-info__horario {
+  color: #CE93D8;
+}
+
+.dash-bar-body .turno-info__label {
+  color: rgba(255,255,255,0.45);
+}
+
+.dash-bar-body .compa-chip {
+  background: rgba(206,147,216,0.15);
+  color: #CE93D8;
+  border-color: rgba(206,147,216,0.3);
+}
+
+.dash-bar-body .turno-semana h4 {
+  color: rgba(255,255,255,0.5);
+}
+
+.dash-bar-body .dia-nombre {
+  color: rgba(255,255,255,0.4);
+}
+
+.dash-bar-body .dia-item--hoy .dia-nombre {
+  color: #CE93D8;
+}
+
+/* Btn nuevo */
+.dash-bar-body .btn-nuevo {
+  background: rgba(74,20,140,0.7);
+  border: 1px solid rgba(206,147,216,0.4);
+}
+
+.dash-bar-body .btn-nuevo:hover {
+  background: #4A148C;
+}
+
+/* Section badge */
+.dash-bar-body .section-badge {
+  background: rgba(206,147,216,0.25);
+  color: #CE93D8;
+}
+
+/* Footer */
+.dash-bar-body .dash-footer {
+  background: linear-gradient(90deg, #0D001F, #1A0030);
+  border-top-color: var(--amarillo);
+}
+
+/* Scrollbar temática */
+.dash-bar-body ::-webkit-scrollbar-thumb { background: #7B1FA2; }
+.dash-bar-body ::-webkit-scrollbar-thumb:hover { background: #9C27B0; }

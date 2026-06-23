@@ -1,0 +1,465 @@
+/* ============================================================
+   PAPEO'S RÍMAC — dashboard-delivery.css
+   Panel de Delivery · Naranja vibrante + verde + oscuro
+   ============================================================ */
+
+.dash-delivery-body {
+  background: #0F1A00;
+}
+
+.dash-delivery-body .dash-section {
+  background: #0F1A00;
+}
+
+.dash-delivery-body .dash-section--alt {
+  background: #141F00;
+}
+
+.dash-delivery-body .section-title {
+  color: #FFB74D;
+}
+
+.dash-delivery-body .section-desc {
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── NAVBAR Delivery ── */
+.navbar--delivery {
+  background: linear-gradient(90deg, #0F1A00 0%, #E65100 100%);
+  border-bottom-color: var(--amarillo);
+}
+
+/* ============================================================
+   HERO DE DELIVERY — ruta, moto, velocidad
+   ============================================================ */
+.hero-delivery {
+  margin-top: var(--navbar-h);
+  min-height: 420px;
+  background: linear-gradient(
+    135deg,
+    #050A00 0%,
+    #1B2E00 30%,
+    #E65100 70%,
+    #FF6F00 100%
+  );
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-delivery::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 10% 60%, rgba(230,81,0,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 30%, rgba(27,94,32,0.3) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, rgba(253,216,53,0.07) 0%, transparent 40%);
+}
+
+/* Línea de ruta animada */
+.delivery-route-anim {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.route-line {
+  position: absolute;
+  bottom: 12px;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.4) 0px,
+    rgba(255,255,255,0.4) 16px,
+    transparent 16px,
+    transparent 32px
+  );
+  border-radius: 2px;
+  animation: linea-scroll 1.2s linear infinite;
+}
+
+@keyframes linea-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 32px 0; }
+}
+
+.route-moto {
+  position: absolute;
+  bottom: 2px;
+  font-size: 1.8rem;
+  animation: moto-ride 4s ease-in-out infinite;
+  left: 10%;
+  filter: drop-shadow(0 2px 6px rgba(255,111,0,0.6));
+}
+
+@keyframes moto-ride {
+  0%   { left: 10%; transform: scaleX(1); }
+  48%  { left: 82%; transform: scaleX(1); }
+  50%  { left: 82%; transform: scaleX(-1); }
+  98%  { left: 10%; transform: scaleX(-1); }
+  100% { left: 10%; transform: scaleX(1); }
+}
+
+.route-pin {
+  position: absolute;
+  bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.start-pin { left: 6%; }
+.end-pin   { right: 8%; }
+
+.hero-delivery__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--sp-3xl) var(--sp-xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: hero-content-in 0.7s ease both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-delivery__content .hero-eyebrow {
+  color: #FFCC02;
+}
+
+.hero-delivery__content .kpi-card {
+  background: rgba(230,81,0,0.3);
+  border-color: rgba(255,183,77,0.35);
+}
+
+.hero-delivery__content .kpi-card:hover {
+  background: rgba(230,81,0,0.5);
+  border-color: rgba(255,183,77,0.6);
+}
+
+/* ============================================================
+   PEDIDOS DEL TURNO — sección exclusiva delivery
+   ============================================================ */
+.pedidos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.pedido-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,183,77,0.2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--trans-base);
+}
+
+.pedido-card:hover {
+  border-color: rgba(255,183,77,0.45);
+  transform: translateX(4px);
+  box-shadow: -4px 0 16px rgba(230,81,0,0.2);
+}
+
+.pedido-card--urgente {
+  border-left: 4px solid var(--rojo-badge);
+  animation: urgente-pulse 2s ease-in-out infinite;
+}
+
+@keyframes urgente-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229,57,53,0); }
+  50%       { box-shadow: 0 0 0 4px rgba(229,57,53,0.15); }
+}
+
+.pedido-card--entregado {
+  opacity: 0.55;
+  border-color: rgba(76,175,80,0.25);
+}
+
+.pedido-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  background: rgba(0,0,0,0.2);
+  flex-wrap: wrap;
+}
+
+.pedido-num {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--amarillo);
+}
+
+.pedido-tiempo {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  margin-left: auto;
+}
+
+.pedido-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.status-delivery--pendiente  { background: rgba(198,40,40,0.2); color: #EF9A9A; border: 1px solid rgba(198,40,40,0.3); }
+.status-delivery--en-camino  { background: rgba(255,193,7,0.2); color: #FFD54F; border: 1px solid rgba(255,193,7,0.3); }
+.status-delivery--entregado  { background: rgba(76,175,80,0.2); color: #A5D6A7; border: 1px solid rgba(76,175,80,0.3); }
+
+.pedido-card__body {
+  padding: var(--sp-sm) var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pedido-cliente {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.88);
+}
+
+.pedido-direccion {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.pedido-items-lista {
+  margin-top: var(--sp-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pedido-items-lista li {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  padding-left: var(--sp-sm);
+  border-left: 2px solid rgba(255,183,77,0.3);
+}
+
+.pedido-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-sm) var(--sp-md);
+  background: rgba(0,0,0,0.15);
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+.pedido-total {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.pedido-total strong {
+  color: var(--amarillo);
+  font-size: 1rem;
+  font-family: var(--font-display);
+}
+
+.pedido-actions {
+  display: flex;
+  gap: var(--sp-xs);
+}
+
+.btn-recoger, .btn-entregar {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  transition: all var(--trans-fast);
+}
+
+.btn-recoger {
+  background: rgba(230,81,0,0.7);
+  color: var(--blanco);
+  border: 1px solid rgba(255,138,101,0.4);
+}
+
+.btn-recoger:hover:not(:disabled) {
+  background: var(--naranja);
+  transform: scale(1.05);
+}
+
+.btn-entregar {
+  background: rgba(76,175,80,0.6);
+  color: var(--blanco);
+  border: 1px solid rgba(76,175,80,0.4);
+}
+
+.btn-entregar:hover:not(:disabled) {
+  background: var(--verde-claro);
+  transform: scale(1.05);
+}
+
+.btn-recoger:disabled,
+.btn-entregar:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pedido-completado-label {
+  font-size: 0.8rem;
+  color: #A5D6A7;
+  font-weight: 600;
+}
+
+/* ============================================================
+   OVERRIDE OSCURO — Delivery
+   ============================================================ */
+.dash-delivery-body .comunicado-card {
+  background: rgba(255,255,255,0.05);
+  border-left-color: #FFB74D;
+  box-shadow: none;
+}
+
+.dash-delivery-body .comunicado-card--importante {
+  border-left-color: #EF9A9A;
+  background: rgba(198,40,40,0.07);
+}
+
+.dash-delivery-body .comunicado-card__title { color: rgba(255,255,255,0.9); }
+.dash-delivery-body .comunicado-card__body  { color: rgba(255,255,255,0.6); }
+.dash-delivery-body .comunicado-fecha       { color: rgba(255,255,255,0.38); }
+
+.dash-delivery-body .btn-leer-mas       { color: #FFB74D; }
+.dash-delivery-body .btn-leer-mas:hover { color: var(--amarillo); }
+
+/* Reconocimientos */
+.dash-delivery-body .reconoc-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,183,77,0.2);
+  box-shadow: none;
+}
+
+.dash-delivery-body .reconoc-card::before {
+  background: linear-gradient(90deg, var(--amarillo), var(--naranja));
+}
+
+.dash-delivery-body .reconoc-card__nombre { color: var(--blanco); }
+.dash-delivery-body .reconoc-card__motivo { color: rgba(255,255,255,0.62); }
+
+.dash-delivery-body .reconoc-card:hover {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(230,81,0,0.35);
+}
+
+/* Ideas */
+.dash-delivery-body .idea-form-salon {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,183,77,0.2);
+}
+
+.dash-delivery-body .idea-textarea {
+  background: rgba(0,0,0,0.35);
+  border-color: rgba(255,183,77,0.3);
+  color: rgba(255,255,255,0.85);
+}
+
+.dash-delivery-body .idea-textarea::placeholder { color: rgba(255,255,255,0.28); }
+
+.dash-delivery-body .idea-textarea:focus {
+  border-color: #FFB74D;
+  box-shadow: 0 0 0 3px rgba(255,183,77,0.15);
+}
+
+.dash-delivery-body .idea-char-count { color: rgba(255,255,255,0.38); }
+
+.dash-delivery-body .idea-item {
+  background: rgba(255,255,255,0.05);
+  border-left-color: rgba(255,183,77,0.5);
+}
+
+.dash-delivery-body .idea-item--aprobada { border-left-color: var(--verde-claro); }
+.dash-delivery-body .idea-texto { color: rgba(255,255,255,0.65); }
+
+/* Encuesta */
+.dash-delivery-body .encuesta-form-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,183,77,0.2);
+}
+
+.dash-delivery-body .encuesta-pregunta__label { color: rgba(255,255,255,0.85); }
+.dash-delivery-body .star-btn { color: rgba(255,255,255,0.18); }
+.dash-delivery-body .star-btn:hover,
+.dash-delivery-body .star-btn.active { color: var(--amarillo); }
+
+.dash-delivery-body .btn-enviar-encuesta {
+  background: linear-gradient(135deg, #E65100, #BF360C);
+}
+
+.dash-delivery-body .btn-enviar-encuesta:hover {
+  background: linear-gradient(135deg, #F4511E, #E65100);
+}
+
+/* Turno */
+.dash-delivery-body .turno-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,183,77,0.2);
+}
+
+.dash-delivery-body .turno-info__horario  { color: #FFB74D; }
+.dash-delivery-body .turno-info__label    { color: rgba(255,255,255,0.42); }
+.dash-delivery-body .turno-semana h4      { color: rgba(255,255,255,0.48); }
+.dash-delivery-body .dia-nombre           { color: rgba(255,255,255,0.38); }
+.dash-delivery-body .dia-item--hoy .dia-nombre { color: #FFB74D; }
+
+.dash-delivery-body .compa-chip {
+  background: rgba(255,183,77,0.15);
+  color: #FFB74D;
+  border-color: rgba(255,183,77,0.3);
+}
+
+/* Zona asignada */
+.dash-delivery-body .zona-chip {
+  background: rgba(230,81,0,0.2);
+  color: #FFB74D;
+  border-color: rgba(255,183,77,0.35);
+}
+
+/* Btn nuevo */
+.dash-delivery-body .btn-nuevo {
+  background: rgba(230,81,0,0.6);
+  border: 1px solid rgba(255,183,77,0.4);
+}
+
+.dash-delivery-body .btn-nuevo:hover { background: #E65100; }
+
+/* Section badge */
+.dash-delivery-body .section-badge {
+  background: rgba(255,183,77,0.2);
+  color: #FFB74D;
+}
+
+.dash-delivery-body .encuesta-badge--activa {
+  background: rgba(76,175,80,0.25);
+  color: var(--verde-claro);
+}
+
+.dash-delivery-body .badge--urgente {
+  background: var(--rojo-badge);
+  color: var(--blanco);
+}
+
+/* Footer */
+.dash-delivery-body .dash-footer {
+  background: linear-gradient(90deg, #050A00, #0F1A00);
+  border-top-color: var(--amarillo);
+}
+
+/* Scrollbar */
+.dash-delivery-body ::-webkit-scrollbar-thumb { background: #E65100; }
+.dash-delivery-body ::-webkit-scrollbar-thumb:hover { background: #F4511E; }

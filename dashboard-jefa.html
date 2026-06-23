@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papeo's | Panel de Jefatura</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/dashboard-jefa.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body class="dash-jefa-body">
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar navbar--jefa">
+    <div class="navbar__left">
+      <img src="assets/images/logo.png" alt="Logo Papeo's" class="navbar__logo" />
+      <span class="navbar__brand">Papeo's <em>Rímac</em></span>
+    </div>
+
+    <nav class="navbar__nav" id="mainNav">
+      <a href="#comunicados" class="nav-link">Comunicados</a>
+      <a href="#reconocimientos" class="nav-link">Reconocimientos</a>
+      <a href="#ideas" class="nav-link">Ideas</a>
+      <a href="#horarios" class="nav-link">Horarios</a>
+      <a href="#encuestas" class="nav-link">Encuestas</a>
+      <a href="#equipo" class="nav-link">Equipo</a>
+      <a href="#contenido" class="nav-link">📁 Contenido</a>
+    </nav>
+
+    <div class="navbar__right">
+      <!-- Campana de notificaciones con badge de videos -->
+      <button class="btn-notif" id="btnNotif" aria-label="Notificaciones" title="Tienes 2 videos disponibles">
+        <span class="notif-icon">🔔</span>
+        <span class="notif-badge" id="notifBadge">2</span>
+      </button>
+
+      <!-- Perfil de usuario -->
+      <div class="navbar__profile" id="navProfile">
+        <img src="assets/images/foto-jefa.jpg" alt="Foto de perfil" class="profile-avatar" />
+        <div class="profile-info">
+          <span class="profile-name" id="profileName">Sra. Katty</span>
+          <span class="profile-role">👑 Jefatura</span>
+        </div>
+        <span class="profile-arrow">▾</span>
+      </div>
+
+      <!-- Dropdown de perfil -->
+      <div class="profile-dropdown" id="profileDropdown" hidden>
+        <div class="profile-dropdown__header">
+          <img src="assets/images/foto-jefa.jpg" alt="Avatar" class="dropdown-avatar" />
+          <div>
+            <strong>Sra. Katty</strong>
+            <small>PapeosJefa2026</small>
+          </div>
+        </div>
+        <hr />
+        <button class="dropdown-item" id="btnLogout">🚪 Cerrar sesión</button>
+      </div>
+
+      <!-- Menú hamburguesa (mobile) -->
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <!-- ===== PANEL DE NOTIFICACIONES / VIDEOS ===== -->
+  <aside class="notif-panel" id="notifPanel" hidden>
+    <div class="notif-panel__header">
+      <h3>🎬 Videos disponibles</h3>
+      <button class="notif-panel__close" id="closeNotifPanel">✕</button>
+    </div>
+    <ul class="notif-list">
+      <li class="notif-item notif-item--video">
+        <span class="notif-item__icon">▶️</span>
+        <div class="notif-item__info">
+          <strong>Bienvenida al equipo Papeo's</strong>
+          <small>Publicado hace 2 días</small>
+        </div>
+        <button class="btn-ver-video" data-video="assets/videos/video1.mp4">Ver</button>
+      </li>
+      <li class="notif-item notif-item--video">
+        <span class="notif-item__icon">▶️</span>
+        <div class="notif-item__info">
+          <strong>Protocolo de atención al cliente</strong>
+          <small>Publicado hace 5 días</small>
+        </div>
+        <button class="btn-ver-video" data-video="assets/videos/video2.mp4">Ver</button>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Modal de video 
+  <div class="video-modal" id="videoModal" hidden>
+    <div class="video-modal__backdrop" id="closeVideoModal"></div>
+    <div class="video-modal__content">
+      <button class="video-modal__close" id="closeVideo">✕</button>
+      <video class="video-player" id="videoPlayer" controls>
+        Tu navegador no soporta el video.
+      </video>
+    </div>
+  </div>-->
+
+  <!-- ===== HERO DE BIENVENIDA ===== -->
+  <section class="hero-jefa" id="heroJefa">
+    <div class="hero-jefa__bg">
+      <img src="assets/images/banner-hero.jpg" alt="Papeo's ambiente" class="hero-jefa__bgimg" />
+      <div class="hero-jefa__overlay"></div>
+    </div>
+    <div class="hero-jefa__content">
+      <span class="hero-eyebrow">Panel de Jefatura · <span id="fechaHoy"></span></span>
+      <h1 class="hero-title">¡Buenos días, <span id="heroNombre">Jefa</span>! 👑</h1>
+      <p class="hero-subtitle">Aquí tienes el resumen del día en Papeo's Rímac.</p>
+
+      <!-- Tarjetas KPI rápidas -->
+      <div class="hero-kpis">
+        <div class="kpi-card">
+          <span class="kpi-number">12</span>
+          <span class="kpi-label">Colaboradores activos hoy</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">3</span>
+          <span class="kpi-label">Comunicados nuevos</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">5</span>
+          <span class="kpi-label">Ideas pendientes</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">1</span>
+          <span class="kpi-label">Encuesta activa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="dash-main">
+
+    <!-- SECCIÓN: Comunicados internos -->
+    <section class="dash-section" id="comunicados">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📢</span> Comunicados Internos</h2>
+        <button class="btn-nuevo" id="btnNuevoComunicado">+ Nuevo comunicado</button>
+      </div>
+      <div class="comunicados-grid">
+        <article class="comunicado-card comunicado-card--importante">
+          <div class="comunicado-card__top">
+            <span class="tag tag--importante">🔴 Importante</span>
+            <span class="comunicado-fecha">20 Jun 2026</span>
+          </div>
+          <h3 class="comunicado-card__title">Actualización de protocolo de atención</h3>
+          <p class="comunicado-card__body">Se ha actualizado el protocolo de atención al cliente para el área de salón. Por favor revisar las nuevas indicaciones antes del turno del viernes.</p>
+          <button class="btn-leer-mas">Leer más →</button>
+        </article>
+
+        <article class="comunicado-card">
+          <div class="comunicado-card__top">
+            <span class="tag tag--info">🟡 Información</span>
+            <span class="comunicado-fecha">18 Jun 2026</span>
+          </div>
+          <h3 class="comunicado-card__title">Nuevo menú de alitas disponible</h3>
+          <p class="comunicado-card__body">Se han incorporado dos nuevos sabores de alitas para la temporada. Cocina recibirá capacitación el martes 24.</p>
+          <button class="btn-leer-mas">Leer más →</button>
+        </article>
+
+        <article class="comunicado-card">
+          <div class="comunicado-card__top">
+            <span class="tag tag--actividad">🟢 Actividad</span>
+            <span class="comunicado-fecha">15 Jun 2026</span>
+          </div>
+          <h3 class="comunicado-card__title">Integración de equipos — Julio 2026</h3>
+          <p class="comunicado-card__body">Se realizará una actividad de integración para todos los colaboradores el sábado 5 de julio. Asistencia obligatoria.</p>
+          <button class="btn-leer-mas">Leer más →</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Reconocimientos -->
+    <section class="dash-section dash-section--alt" id="reconocimientos">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">🏆</span> Reconocemos tu Esfuerzo</h2>
+        <button class="btn-nuevo" id="btnNuevoReconocimiento">+ Publicar reconocimiento</button>
+      </div>
+      <p class="section-desc">Colaboradores destacados del mes de Junio 2026</p>
+
+      <div class="reconocimientos-grid">
+        <div class="reconoc-card">
+          <div class="reconoc-card__medal">🥇</div>
+          <img src="assets/images/colaborador1.jpg" alt="Foto colaborador" class="reconoc-card__foto" />
+          <h3 class="reconoc-card__nombre">Diana</h3>
+          <span class="reconoc-card__area area-chip area-chip--salon">🍽️ Salón</span>
+          <p class="reconoc-card__motivo">"Su trato cálido y rapidez en el servicio marcaron la diferencia esta semana."</p>
+          <div class="reconoc-card__likes">
+            <button class="btn-like" aria-label="Me encanta">❤️ <span>24</span></button>
+          </div>
+        </div>
+
+        <div class="reconoc-card">
+          <div class="reconoc-card__medal">🥈</div>
+          <img src="assets/images/colaborador2.jpg" alt="Foto colaborador" class="reconoc-card__foto" />
+          <h3 class="reconoc-card__nombre">Silvana</h3>
+          <span class="reconoc-card__area area-chip area-chip--cocina">👨‍🍳 Cocina</span>
+          <p class="reconoc-card__motivo">"Responsabilidad y puntualidad ejemplares durante todo el mes."</p>
+          <div class="reconoc-card__likes">
+            <button class="btn-like" aria-label="Me encanta">❤️ <span>18</span></button>
+          </div>
+        </div>
+
+        <div class="reconoc-card">
+          <div class="reconoc-card__medal">🥉</div>
+          <img src="assets/images/colaborador3.jpg" alt="Foto colaborador" class="reconoc-card__foto" />
+          <h3 class="reconoc-card__nombre">Angel</h3>
+          <span class="reconoc-card__area area-chip area-chip--delivery">🛵 Delivery</span>
+          <p class="reconoc-card__motivo">"Cero pedidos con retraso durante el mes. ¡Récord personal!"</p>
+          <div class="reconoc-card__likes">
+            <button class="btn-like" aria-label="Me encanta">❤️ <span>15</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Ideas que mejoran -->
+    <section class="dash-section" id="ideas">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">💡</span> Ideas que Mejoran</h2>
+        <span class="section-badge">5 propuestas nuevas</span>
+      </div>
+      <p class="section-desc">Propuestas enviadas por el equipo — pendientes de revisión</p>
+
+      <div class="ideas-lista">
+        <div class="idea-item idea-item--pendiente">
+          <div class="idea-item__header">
+            <span class="idea-area area-chip area-chip--bar">🍹 Bar</span>
+            <span class="idea-fecha">19 Jun 2026</span>
+            <span class="idea-status status--pendiente">⏳ Pendiente</span>
+          </div>
+          <p class="idea-texto">"Agregar cartas de tragos con QR para que los clientes vean fotos de cada bebida antes de pedir."</p>
+          <div class="idea-actions">
+            <button class="btn-aprobar">✅ Aprobar</button>
+            <button class="btn-revisar">🔄 En revisión</button>
+            <button class="btn-rechazar">❌ Rechazar</button>
+          </div>
+        </div>
+
+        <div class="idea-item idea-item--aprobada">
+          <div class="idea-item__header">
+            <span class="idea-area area-chip area-chip--cocina">👨‍🍳 Cocina</span>
+            <span class="idea-fecha">17 Jun 2026</span>
+            <span class="idea-status status--aprobada">✅ Aprobada</span>
+          </div>
+          <p class="idea-texto">"Reorganizar el área de mise en place para reducir tiempos de preparación de alitas."</p>
+          <div class="idea-actions">
+            <button class="btn-ver-detalle">Ver detalle →</button>
+          </div>
+        </div>
+
+        <div class="idea-item idea-item--pendiente">
+          <div class="idea-item__header">
+            <span class="idea-area area-chip area-chip--delivery">🛵 Delivery</span>
+            <span class="idea-fecha">15 Jun 2026</span>
+            <span class="idea-status status--pendiente">⏳ Pendiente</span>
+          </div>
+          <p class="idea-texto">"Implementar un sistema de confirmación de pedido por WhatsApp para reducir llamadas erróneas."</p>
+          <div class="idea-actions">
+            <button class="btn-aprobar">✅ Aprobar</button>
+            <button class="btn-revisar">🔄 En revisión</button>
+            <button class="btn-rechazar">❌ Rechazar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Horarios del equipo -->
+    <section class="dash-section dash-section--alt" id="horarios">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">🗓️</span> Horarios del Equipo</h2>
+        <button class="btn-nuevo" id="btnEditarHorario">✏️ Editar horarios</button>
+      </div>
+
+      <div class="horarios-tabs">
+        <button class="horario-tab horario-tab--active" data-area="salon">🍽️ Salón</button>
+        <button class="horario-tab" data-area="bar">🍹 Bar</button>
+        <button class="horario-tab" data-area="cocina">👨‍🍳 Cocina</button>
+        <button class="horario-tab" data-area="delivery">🛵 Delivery</button>
+      </div>
+
+      <div class="horarios-tabla-wrap">
+        <table class="horarios-tabla" id="horarioTabla">
+          <thead>
+            <tr>
+              <th>Colaborador</th>
+              <th>Lunes</th>
+              <th>Martes</th>
+              <th>Miércoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+              <th>Sábado</th>
+              <th>Domingo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nombre">Diana</td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--libre">—</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--noche">N</span></td>
+              <td><span class="turno turno--libre">—</span></td>
+            </tr>
+            <tr>
+              <td class="col-nombre">Angel</td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--libre">—</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--noche">N</span></td>
+              <td><span class="turno turno--noche">N</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+            </tr>
+            <tr>
+              <td class="col-nombre">Andrea Soto</td>
+              <td><span class="turno turno--libre">—</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--libre">—</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--tarde">T</span></td>
+              <td><span class="turno turno--noche">N</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="horario-leyenda">
+          <span><span class="turno turno--tarde">T</span> Tarde (17:00–23:30)</span>
+          <span><span class="turno turno--noche">N</span> Noche (19:00–01:30)</span>
+          <span><span class="turno turno--libre">—</span> Libre</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Encuestas internas -->
+    <section class="dash-section" id="encuestas">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📊</span> Encuestas Internas</h2>
+        <button class="btn-nuevo" id="btnNuevaEncuesta">+ Nueva encuesta</button>
+      </div>
+      <p class="section-desc">Encuesta trimestral de satisfacción — Junio 2026</p>
+
+      <div class="encuestas-grid">
+
+        <!-- Tarjeta de resultado de encuesta -->
+        <div class="encuesta-resultado-card">
+          <h3 class="encuesta-rc-title">Comunicación Interna</h3>
+          <div class="encuesta-items">
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Claridad de información</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar" style="--pct: 78%">
+                  <span class="encuesta-bar__pct">78%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Facilidad para expresar opiniones</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar" style="--pct: 65%">
+                  <span class="encuesta-bar__pct">65%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Comunicación entre áreas</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar" style="--pct: 70%">
+                  <span class="encuesta-bar__pct">70%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="encuesta-resultado-card">
+          <h3 class="encuesta-rc-title">Reconocimiento Laboral</h3>
+          <div class="encuesta-items">
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Valoración del esfuerzo</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 85%">
+                  <span class="encuesta-bar__pct">85%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Motivación del personal</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 80%">
+                  <span class="encuesta-bar__pct">80%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Importancia del reconocimiento</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 90%">
+                  <span class="encuesta-bar__pct">90%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="encuesta-resultado-card">
+          <h3 class="encuesta-rc-title">Igualdad y Confianza</h3>
+          <div class="encuesta-items">
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Percepción de trato justo</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--media" style="--pct: 72%">
+                  <span class="encuesta-bar__pct">72%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Transparencia en decisiones</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--media" style="--pct: 68%">
+                  <span class="encuesta-bar__pct">68%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Confianza hacia responsables</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 82%">
+                  <span class="encuesta-bar__pct">82%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="encuesta-resultado-card">
+          <h3 class="encuesta-rc-title">Integración entre Áreas</h3>
+          <div class="encuesta-items">
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Apoyo entre equipos</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 88%">
+                  <span class="encuesta-bar__pct">88%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Trabajo conjunto</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 83%">
+                  <span class="encuesta-bar__pct">83%</span>
+                </div>
+              </div>
+            </div>
+            <div class="encuesta-item">
+              <span class="encuesta-item__label">Relación entre áreas</span>
+              <div class="encuesta-bar-wrap">
+                <div class="encuesta-bar encuesta-bar--alta" style="--pct: 86%">
+                  <span class="encuesta-bar__pct">86%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /encuestas-grid -->
+    </section>
+
+    <!-- SECCIÓN: Información del equipo -->
+    <section class="dash-section dash-section--alt" id="equipo">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">👥</span> Información del Equipo</h2>
+        <button class="btn-nuevo" id="btnAgregarColaborador">+ Agregar colaborador</button>
+      </div>
+
+      <div class="equipo-grid">
+        <div class="equipo-card">
+          <img src="assets/images/colaborador1.jpg" alt="Foto" class="equipo-card__foto" />
+          <div class="equipo-card__info">
+            <h4 class="equipo-card__nombre">Diana</h4>
+            <span class="area-chip area-chip--salon">🍽️ Salón</span>
+            <p class="equipo-card__detalle">Turno tarde · Ingresó: Ene 2025</p>
+            <p class="equipo-card__contacto">📞 987-654-321</p>
+          </div>
+        </div>
+
+        <div class="equipo-card">
+          <img src="assets/images/colaborador2.jpg" alt="Foto" class="equipo-card__foto" />
+          <div class="equipo-card__info">
+            <h4 class="equipo-card__nombre">Silvana</h4>
+            <span class="area-chip area-chip--cocina">👨‍🍳 Cocina</span>
+            <p class="equipo-card__detalle">Turno tarde · Ingresó: Mar 2024</p>
+            <p class="equipo-card__contacto">📞 976-543-210</p>
+          </div>
+        </div>
+
+        <div class="equipo-card">
+          <img src="assets/images/colaborador3.jpg" alt="Foto" class="equipo-card__foto" />
+          <div class="equipo-card__info">
+            <h4 class="equipo-card__nombre">Angel</h4>
+            <span class="area-chip area-chip--delivery">🛵 Delivery</span>
+            <p class="equipo-card__detalle">Turno noche · Ingresó: Jun 2025</p>
+            <p class="equipo-card__contacto">📞 965-432-109</p>
+          </div>
+        </div>
+
+        <div class="equipo-card">
+          <img src="assets/images/colaborador4.jpg" alt="Foto" class="equipo-card__foto" />
+          <div class="equipo-card__info">
+            <h4 class="equipo-card__nombre">Bish Mamani</h4>
+            <span class="area-chip area-chip--bar">🍹 Bar</span>
+            <p class="equipo-card__detalle">Turno noche · Ingresó: Sep 2024</p>
+            <p class="equipo-card__contacto">📞 954-321-098</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Gestión de contenido (videos + encuestas) -->
+    <section class="dash-section" id="contenido">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📁</span> Gestión de Contenido</h2>
+        <span class="section-desc-inline">Solo visible para Jefatura</span>
+      </div>
+      <p class="section-desc">Sube videos internos o comparte links de encuestas que verá todo el equipo.</p>
+
+      <!-- Tabs para elegir tipo -->
+      <div class="contenido-tabs">
+        <button class="contenido-tab contenido-tab--active" data-tipo="video" id="tabVideo">🎬 Subir Video</button>
+        <button class="contenido-tab" data-tipo="encuesta" id="tabEncuesta">📋 Link de Encuesta</button>
+        <button class="contenido-tab" data-tipo="link" id="tabLink">🔗 Link / Comunicado</button>
+      </div>
+
+      <!-- Panel: Subir Video -->
+      <div class="contenido-panel" id="panelVideo">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-area__icon">🎬</div>
+          <p class="upload-area__texto">Arrastra un video aquí o haz click para seleccionar</p>
+          <p class="upload-area__sub">Formatos: MP4, MOV, AVI · Máx. recomendado: 200MB</p>
+          <input type="file" id="inputVideo" accept="video/*" class="upload-input" />
+          <button class="btn-upload-select" id="btnSelectVideo">Seleccionar archivo</button>
+        </div>
+
+        <!-- Preview del video seleccionado -->
+        <div class="upload-preview" id="uploadPreview" hidden>
+          <video class="upload-preview__video" id="previewVideo" controls></video>
+          <div class="upload-preview__info" id="previewInfo"></div>
+          <button class="btn-quitar-video" id="btnQuitarVideo">✕ Quitar</button>
+        </div>
+
+        <div class="contenido-form" id="formVideo">
+          <label class="form-label">Asunto / Título del video <span class="required">*</span></label>
+          <input type="text" class="modal-input" id="videoTitulo" placeholder="Ej: Protocolo de atención al cliente" maxlength="80" />
+
+          <label class="form-label">Descripción (opcional)</label>
+          <textarea class="modal-textarea" id="videoDesc" placeholder="Breve descripción del contenido del video..." rows="2" maxlength="200"></textarea>
+
+          <label class="form-label">Área destinataria</label>
+          <select class="modal-select" id="videoArea">
+            <option value="todos">👥 Todos los colaboradores</option>
+            <option value="salon">🍽️ Solo Salón</option>
+            <option value="bar">🍹 Solo Bar</option>
+            <option value="cocina">👨‍🍳 Solo Cocina</option>
+            <option value="delivery">🛵 Solo Delivery</option>
+          </select>
+
+          <button class="btn-publicar" id="btnPublicarVideo">🎬 Publicar video</button>
+        </div>
+      </div>
+
+      <!-- Panel: Link de Encuesta (Google Forms) -->
+      <div class="contenido-panel" id="panelEncuesta" hidden>
+        <div class="contenido-form">
+          <div class="encuesta-info-banner">
+            <span>📋</span>
+            <p>Las encuestas se publican como links de <strong>Google Forms</strong>. El equipo las verá en su sección de Encuestas.</p>
+          </div>
+
+          <label class="form-label">Título de la encuesta <span class="required">*</span></label>
+          <input type="text" class="modal-input" id="encuestaTitulo" placeholder="Ej: Encuesta trimestral de satisfacción Q3 2026" maxlength="80" />
+
+          <label class="form-label">Link de Google Forms <span class="required">*</span></label>
+          <div class="link-input-wrap">
+            <span class="link-icon">🔗</span>
+            <input type="url" class="modal-input link-input" id="encuestaLink" placeholder="https://forms.gle/..." />
+          </div>
+          <p class="input-hint">Debe ser un link válido de Google Forms (forms.gle o docs.google.com/forms)</p>
+
+          <label class="form-label">Fecha límite de respuesta</label>
+          <input type="date" class="modal-input" id="encuestaFecha" />
+
+          <label class="form-label">Área destinataria</label>
+          <select class="modal-select" id="encuestaArea">
+            <option value="todos">👥 Todos los colaboradores</option>
+            <option value="salon">🍽️ Solo Salón</option>
+            <option value="bar">🍹 Solo Bar</option>
+            <option value="cocina">👨‍🍳 Solo Cocina</option>
+            <option value="delivery">🛵 Solo Delivery</option>
+          </select>
+
+          <button class="btn-publicar btn-publicar--encuesta" id="btnPublicarEncuesta">📋 Publicar encuesta</button>
+        </div>
+      </div>
+
+      <!-- Panel: Link / Comunicado externo -->
+      <div class="contenido-panel" id="panelLink" hidden>
+        <div class="contenido-form">
+          <label class="form-label">Asunto <span class="required">*</span></label>
+          <input type="text" class="modal-input" id="linkAsunto" placeholder="Ej: Manual de procedimientos actualizado" maxlength="80" />
+
+          <label class="form-label">URL del recurso <span class="required">*</span></label>
+          <div class="link-input-wrap">
+            <span class="link-icon">🔗</span>
+            <input type="url" class="modal-input link-input" id="linkUrl" placeholder="https://..." />
+          </div>
+
+          <label class="form-label">Descripción</label>
+          <textarea class="modal-textarea" id="linkDesc" placeholder="Describe brevemente el contenido del link..." rows="2" maxlength="200"></textarea>
+
+          <label class="form-label">Tipo</label>
+          <select class="modal-select" id="linkTipo">
+            <option value="documento">📄 Documento</option>
+            <option value="video-yt">▶️ Video externo</option>
+            <option value="imagen">🖼️ Imagen / Infografía</option>
+            <option value="otro">🔗 Otro recurso</option>
+          </select>
+
+          <label class="form-label">Área destinataria</label>
+          <select class="modal-select" id="linkArea">
+            <option value="todos">👥 Todos los colaboradores</option>
+            <option value="salon">🍽️ Solo Salón</option>
+            <option value="bar">🍹 Solo Bar</option>
+            <option value="cocina">👨‍🍳 Solo Cocina</option>
+            <option value="delivery">🛵 Solo Delivery</option>
+          </select>
+
+          <button class="btn-publicar btn-publicar--link" id="btnPublicarLink">🔗 Publicar recurso</button>
+        </div>
+      </div>
+
+      <!-- Lista de contenido publicado -->
+      <div class="contenido-publicado" id="contenidoPublicado">
+        <h3 class="contenido-publicado__titulo">📂 Contenido publicado recientemente</h3>
+        <div class="publicado-lista" id="publicadoLista">
+
+          <div class="publicado-item publicado-item--video">
+            <div class="publicado-item__icon">🎬</div>
+            <div class="publicado-item__info">
+              <strong>Bienvenida al equipo Papeo's</strong>
+              <span class="publicado-area area-chip area-chip--jefa">👥 Todos</span>
+              <small>Publicado hace 2 días</small>
+            </div>
+            <div class="publicado-item__actions">
+              <span class="publicado-tag publicado-tag--video">Video</span>
+              <button class="btn-eliminar-publicado" data-id="v1" title="Eliminar">🗑️</button>
+            </div>
+          </div>
+
+          <div class="publicado-item publicado-item--video">
+            <div class="publicado-item__icon">🎬</div>
+            <div class="publicado-item__info">
+              <strong>Protocolo de atención al cliente</strong>
+              <span class="publicado-area area-chip area-chip--salon">🍽️ Salón</span>
+              <small>Publicado hace 5 días</small>
+            </div>
+            <div class="publicado-item__actions">
+              <span class="publicado-tag publicado-tag--video">Video</span>
+              <button class="btn-eliminar-publicado" data-id="v2" title="Eliminar">🗑️</button>
+            </div>
+          </div>
+
+          <div class="publicado-item publicado-item--encuesta">
+            <div class="publicado-item__icon">📋</div>
+            <div class="publicado-item__info">
+              <strong>Encuesta de satisfacción Q2 2026</strong>
+              <span class="publicado-area area-chip area-chip--jefa">👥 Todos</span>
+              <small>Vence: 30 Jun 2026</small>
+            </div>
+            <div class="publicado-item__actions">
+              <a href="#" class="publicado-tag publicado-tag--encuesta" target="_blank">Google Forms ↗</a>
+              <button class="btn-eliminar-publicado" data-id="e1" title="Eliminar">🗑️</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- /dash-main -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="dash-footer">
+    <div class="footer-inner">
+      <img src="assets/images/logo.png" alt="Logo Papeo's" class="footer-logo" />
+      <p>© 2026 Papeo's Rímac · Intranet Corporativa · Todos los derechos reservados</p>
+      <p class="footer-address">Av. Samuel Alcázar 862, Rímac, Lima · 📞 Contacto interno</p>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+  <script src="js/dashboard-jefa.js"></script>
+</body>
+</html>

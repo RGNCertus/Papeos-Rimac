@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papeo's | Intranet — Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body class="login-body">
+
+  <!-- ===== PANEL IZQUIERDO: Imagen de marca ===== -->
+  <aside class="login-left">
+    <div class="login-left__overlay"></div>
+    <img src="assets/images/bg-login.jpg" alt="Papeo's Rímac ambiente" class="login-left__bg" />
+
+    <div class="login-left__content">
+      <!-- Logo superior izquierdo -->
+      <div class="login-logo">
+        <img src="assets/images/logo.png" alt="Logo Papeo's Rímac" class="login-logo__img" />
+      </div>
+
+      <!-- Texto central de bienvenida -->
+      <div class="login-left__hero">
+        <span class="login-left__eyebrow">Bienvenido/a al portal interno de</span>
+        <h1 class="login-left__title">Papeo's<br /><span>Rímac</span></h1>
+        <p class="login-left__subtitle">
+          Alitas, sabor y equipo.<br />Todo lo que necesitas, en un solo lugar.
+        </p>
+      </div>
+
+      <!-- Footer del panel izq -->
+      <p class="login-left__footer">© 2026 Papeo's Rímac · Intranet Corporativa</p>
+    </div>
+  </aside>
+
+  <!-- ===== PANEL DERECHO: Formulario de login ===== -->
+  <main class="login-right">
+    <div class="login-card">
+
+      <!-- Encabezado del formulario -->
+      <div class="login-card__header">
+        <div class="login-card__icon">🍗</div>
+        <h2 class="login-card__title">Iniciar sesión</h2>
+        <p class="login-card__desc">Ingresa tus credenciales de área para continuar</p>
+      </div>
+
+      <!-- Formulario -->
+      <div class="login-form" id="loginForm">
+
+        <div class="form-group">
+          <label for="username" class="form-label">Usuario</label>
+          <div class="form-input-wrap">
+            <span class="form-icon">👤</span>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-input"
+              placeholder="Ej: PapeosJefa2026"
+              autocomplete="username"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="form-input-wrap">
+            <span class="form-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="••••••••••"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" class="form-toggle-pwd" id="togglePwd" aria-label="Mostrar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <!-- Mensaje de error (oculto por defecto) -->
+        <div class="login-error" id="loginError" role="alert" aria-live="polite" hidden>
+          <span class="login-error__icon">⚠️</span>
+          <span class="login-error__text">Usuario o contraseña incorrectos. Verifica tus datos.</span>
+        </div>
+
+        <!-- Bloqueo temporal (oculto por defecto) -->
+        <div class="login-blocked" id="loginBlocked" role="alert" aria-live="polite" hidden>
+          <span class="login-blocked__icon">🚫</span>
+          <span class="login-blocked__text">Demasiados intentos fallidos. Espera <strong id="countdownTimer">30</strong> segundos.</span>
+        </div>
+
+        <button type="button" class="btn-login" id="btnLogin">
+          <span class="btn-login__text">Ingresar</span>
+          <span class="btn-login__arrow">→</span>
+        </button>
+
+        <p class="login-help">
+          ¿Problemas para ingresar? Contacta a tu encargada de área.
+        </p>
+
+      </div>
+      <!-- /login-form -->
+
+      <!-- Indicador de intentos -->
+      <div class="login-attempts" id="loginAttempts" hidden>
+        <span id="attemptsText">Intentos restantes: <strong id="attemptsCount">3</strong></span>
+      </div>
+
+    </div>
+    <!-- /login-card -->
+
+    <!-- Chips decorativos de área (solo visual) -->
+    <div class="login-areas">
+      <span class="area-chip area-chip--jefa">👑 Jefatura</span>
+      <span class="area-chip area-chip--salon">🍽️ Salón</span>
+      <span class="area-chip area-chip--bar">🍹 Bar</span>
+      <span class="area-chip area-chip--cocina">👨‍🍳 Cocina</span>
+      <span class="area-chip area-chip--delivery">🛵 Delivery</span>
+    </div>
+
+  </main>
+  <!-- /login-right -->
+
+  <script src="js/login.js"></script>
+</body>
+</html>

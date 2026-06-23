@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papeo's | Panel de Delivery</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/dashboard-delivery.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body class="dash-delivery-body">
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar navbar--delivery">
+    <div class="navbar__left">
+      <img src="assets/images/logo.png" alt="Logo Papeo's" class="navbar__logo" />
+      <span class="navbar__brand">Papeo's <em>Rímac</em></span>
+    </div>
+
+    <nav class="navbar__nav" id="mainNav">
+      <a href="#mi-turno" class="nav-link">Mi Turno</a>
+      <a href="#pedidos" class="nav-link">Pedidos del Turno</a>
+      <a href="#comunicados" class="nav-link">Comunicados</a>
+      <a href="#reconocimientos" class="nav-link">Reconocimientos</a>
+      <a href="#ideas" class="nav-link">Ideas</a>
+      <a href="#encuesta" class="nav-link">Encuesta</a>
+    </nav>
+
+    <div class="navbar__right">
+      <button class="btn-notif" id="btnNotif" aria-label="Notificaciones" title="Tienes 2 videos disponibles">
+        <span class="notif-icon">🔔</span>
+        <span class="notif-badge" id="notifBadge">2</span>
+      </button>
+
+      <div class="navbar__profile" id="navProfile">
+        <img src="assets/images/foto-delivery.jpg" alt="Foto de perfil" class="profile-avatar" />
+        <div class="profile-info">
+          <span class="profile-name" id="profileName">Equipo Delivery</span>
+          <span class="profile-role">🛵 Delivery</span>
+        </div>
+        <span class="profile-arrow">▾</span>
+      </div>
+
+      <div class="profile-dropdown" id="profileDropdown" hidden>
+        <div class="profile-dropdown__header">
+          <img src="assets/images/foto-delivery.jpg" alt="Avatar" class="dropdown-avatar" />
+          <div>
+            <strong>Equipo Delivery</strong>
+            <small>PapeosDelivery2026</small>
+          </div>
+        </div>
+        <hr />
+        <button class="dropdown-item" id="btnLogout">🚪 Cerrar sesión</button>
+      </div>
+
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <!-- ===== PANEL DE NOTIFICACIONES / VIDEOS ===== -->
+  <aside class="notif-panel" id="notifPanel" hidden>
+    <div class="notif-panel__header">
+      <h3>🎬 Videos disponibles</h3>
+      <button class="notif-panel__close" id="closeNotifPanel">✕</button>
+    </div>
+    <ul class="notif-list">
+      <li class="notif-item notif-item--video">
+        <span class="notif-item__icon">▶️</span>
+        <div class="notif-item__info">
+          <strong>Bienvenida al equipo Papeo's</strong>
+          <small>Publicado hace 2 días</small>
+        </div>
+        <button class="btn-ver-video" data-video="assets/videos/video1.mp4">Ver</button>
+      </li>
+      <li class="notif-item notif-item--video">
+        <span class="notif-item__icon">▶️</span>
+        <div class="notif-item__info">
+          <strong>Protocolo de atención al cliente</strong>
+          <small>Publicado hace 5 días</small>
+        </div>
+        <button class="btn-ver-video" data-video="assets/videos/video2.mp4">Ver</button>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Modal de video 
+  <div class="video-modal" id="videoModal" hidden>
+    <div class="video-modal__backdrop" id="closeVideoModal"></div>
+    <div class="video-modal__content">
+      <button class="video-modal__close" id="closeVideo">✕</button>
+      <video class="video-player" id="videoPlayer" controls>
+        Tu navegador no soporta el video.
+      </video>
+    </div>
+  </div> -->
+
+  <!-- ===== HERO DE BIENVENIDA ===== -->
+  <section class="hero-delivery" id="heroDelivery">
+    <!-- Iconos de ruta animados -->
+    <div class="delivery-route-anim" aria-hidden="true">
+      <div class="route-line"></div>
+      <span class="route-moto" id="routeMoto">🛵</span>
+      <span class="route-pin start-pin">📍</span>
+      <span class="route-pin end-pin">🏠</span>
+    </div>
+
+    <div class="hero-delivery__content">
+      <span class="hero-eyebrow">Área de Delivery · <span id="fechaHoy"></span></span>
+      <h1 class="hero-title">¡A rodar, equipo Delivery! 🛵</h1>
+      <p class="hero-subtitle">Cada entrega a tiempo es un cliente feliz. ¡Papeo's llega a casa!</p>
+
+      <div class="hero-kpis">
+        <div class="kpi-card">
+          <span class="kpi-icon">🕐</span>
+          <span class="kpi-number" id="horaActual">—</span>
+          <span class="kpi-label">Hora actual</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-icon">📦</span>
+          <span class="kpi-number" id="pedidosPendientes">4</span>
+          <span class="kpi-label">Pedidos pendientes</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-icon">✅</span>
+          <span class="kpi-number" id="pedidosEntregados">7</span>
+          <span class="kpi-label">Entregados hoy</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-icon">⏱️</span>
+          <span class="kpi-number">28 min</span>
+          <span class="kpi-label">Promedio de entrega</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="dash-main">
+
+    <!-- SECCIÓN: Mi Turno -->
+    <section class="dash-section" id="mi-turno">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">🗓️</span> Mi Turno</h2>
+      </div>
+      <div class="turno-card">
+        <div class="turno-card__hoy">
+          <div class="turno-info">
+            <span class="turno-info__label">Hoy, <span id="diaHoy">domingo</span></span>
+            <span class="turno-info__horario">🕔 17:00 – 23:00</span>
+            <span class="turno-info__tipo tipo--tarde">Turno Tarde</span>
+          </div>
+          <div class="turno-info">
+            <span class="turno-info__label">Compañeros de turno</span>
+            <div class="turno-compas">
+              <span class="compa-chip">Angel P.</span>
+              <span class="compa-chip">Raúl H.</span>
+            </div>
+          </div>
+          <div class="turno-info">
+            <span class="turno-info__label">Zona asignada</span>
+            <div class="zona-chip">📍 Rímac Centro y alrededores</div>
+          </div>
+        </div>
+        <div class="turno-semana">
+          <h4>Esta semana</h4>
+          <div class="turno-semana-grid">
+            <div class="dia-item dia-item--hoy"><span class="dia-nombre">Dom</span><span class="turno turno--tarde">T</span></div>
+            <div class="dia-item"><span class="dia-nombre">Lun</span><span class="turno turno--libre">—</span></div>
+            <div class="dia-item"><span class="dia-nombre">Mar</span><span class="turno turno--tarde">T</span></div>
+            <div class="dia-item"><span class="dia-nombre">Mié</span><span class="turno turno--tarde">T</span></div>
+            <div class="dia-item"><span class="dia-nombre">Jue</span><span class="turno turno--tarde">T</span></div>
+            <div class="dia-item"><span class="dia-nombre">Vie</span><span class="turno turno--noche">N</span></div>
+            <div class="dia-item"><span class="dia-nombre">Sáb</span><span class="turno turno--noche">N</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Pedidos del turno (exclusiva de Delivery) -->
+    <section class="dash-section dash-section--alt" id="pedidos">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📦</span> Pedidos del Turno</h2>
+        <span class="section-badge badge--urgente">4 pendientes</span>
+      </div>
+      <p class="section-desc">Pedidos activos para este turno. Actualiza el estado al completar cada entrega.</p>
+
+      <div class="pedidos-lista" id="pedidosLista">
+
+        <div class="pedido-card pedido-card--urgente">
+          <div class="pedido-card__header">
+            <span class="pedido-num">#0041</span>
+            <span class="pedido-status status-delivery--pendiente">🔴 Pendiente</span>
+            <span class="pedido-tiempo">⏱️ Hace 5 min</span>
+          </div>
+          <div class="pedido-card__body">
+            <p class="pedido-cliente">👤 Ana Gutiérrez</p>
+            <p class="pedido-direccion">📍 Jr. Trujillo 342, Rímac</p>
+            <ul class="pedido-items-lista">
+              <li>🍗 Alitas BBQ x10 + papas fritas</li>
+              <li>🍺 Cerveza artesanal x2</li>
+            </ul>
+          </div>
+          <div class="pedido-card__footer">
+            <span class="pedido-total">Total: <strong>S/ 58</strong></span>
+            <div class="pedido-actions">
+              <button class="btn-recoger" data-id="0041">🛵 Recoger</button>
+              <button class="btn-entregar" data-id="0041" disabled>✅ Entregado</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pedido-card">
+          <div class="pedido-card__header">
+            <span class="pedido-num">#0040</span>
+            <span class="pedido-status status-delivery--en-camino">🟡 En camino</span>
+            <span class="pedido-tiempo">⏱️ Hace 18 min</span>
+          </div>
+          <div class="pedido-card__body">
+            <p class="pedido-cliente">👤 Luis Herrera</p>
+            <p class="pedido-direccion">📍 Av. Alcázar 540, Rímac</p>
+            <ul class="pedido-items-lista">
+              <li>🍔 Hamburguesa Doble Queso x2</li>
+              <li>🧃 Limonada Frozen x2</li>
+            </ul>
+          </div>
+          <div class="pedido-card__footer">
+            <span class="pedido-total">Total: <strong>S/ 72</strong></span>
+            <div class="pedido-actions">
+              <button class="btn-recoger" data-id="0040" disabled>🛵 Recogido</button>
+              <button class="btn-entregar" data-id="0040">✅ Entregado</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pedido-card">
+          <div class="pedido-card__header">
+            <span class="pedido-num">#0039</span>
+            <span class="pedido-status status-delivery--pendiente">🔴 Pendiente</span>
+            <span class="pedido-tiempo">⏱️ Hace 2 min</span>
+          </div>
+          <div class="pedido-card__body">
+            <p class="pedido-cliente">👤 Carmen Rivas</p>
+            <p class="pedido-direccion">📍 Jr. Cusco 218, Rímac</p>
+            <ul class="pedido-items-lista">
+              <li>🍗 Alitas Miel Mostaza x6</li>
+              <li>🍟 Salchipapas x1</li>
+            </ul>
+          </div>
+          <div class="pedido-card__footer">
+            <span class="pedido-total">Total: <strong>S/ 38</strong></span>
+            <div class="pedido-actions">
+              <button class="btn-recoger" data-id="0039">🛵 Recoger</button>
+              <button class="btn-entregar" data-id="0039" disabled>✅ Entregado</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pedido-card pedido-card--entregado">
+          <div class="pedido-card__header">
+            <span class="pedido-num">#0038</span>
+            <span class="pedido-status status-delivery--entregado">🟢 Entregado</span>
+            <span class="pedido-tiempo">⏱️ Hace 35 min</span>
+          </div>
+          <div class="pedido-card__body">
+            <p class="pedido-cliente">👤 Marco Silva</p>
+            <p class="pedido-direccion">📍 Jr. Puno 105, Rímac</p>
+            <ul class="pedido-items-lista">
+              <li>🍗 Alitas Buffalo x12</li>
+              <li>🍷 Sangría jarra x1</li>
+            </ul>
+          </div>
+          <div class="pedido-card__footer">
+            <span class="pedido-total">Total: <strong>S/ 83</strong></span>
+            <span class="pedido-completado-label">✅ Completado</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Comunicados -->
+    <section class="dash-section" id="comunicados">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📢</span> Comunicados para Delivery</h2>
+      </div>
+      <div class="comunicados-grid">
+        <article class="comunicado-card comunicado-card--importante">
+          <div class="comunicado-card__top">
+            <span class="tag tag--importante">🔴 Importante</span>
+            <span class="comunicado-fecha">20 Jun 2026</span>
+          </div>
+          <h3 class="comunicado-card__title">Nuevo sistema de confirmación de pedido</h3>
+          <p class="comunicado-card__body">Se aprobó la propuesta de confirmación vía WhatsApp. A partir del lunes, confirmar al cliente 5 minutos antes de llegar.</p>
+          <button class="btn-leer-mas">Leer más →</button>
+        </article>
+        <article class="comunicado-card">
+          <div class="comunicado-card__top">
+            <span class="tag tag--info">🟡 Información</span>
+            <span class="comunicado-fecha">18 Jun 2026</span>
+          </div>
+          <h3 class="comunicado-card__title">Radio de cobertura ampliado</h3>
+          <p class="comunicado-card__body">Desde el viernes se acepta delivery hasta Independencia Norte. Verificar el mapa actualizado en la zona de motos.</p>
+          <button class="btn-leer-mas">Leer más →</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Reconocimientos -->
+    <section class="dash-section dash-section--alt" id="reconocimientos">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">🏆</span> Reconocemos tu Esfuerzo</h2>
+      </div>
+      <div class="reconocimientos-grid">
+        <div class="reconoc-card">
+          <div class="reconoc-card__medal">🥉</div>
+          <img src="assets/images/colaborador3.jpg" alt="Foto" class="reconoc-card__foto" />
+          <h3 class="reconoc-card__nombre">Angel</h3>
+          <span class="reconoc-card__area area-chip area-chip--delivery">🛵 Delivery</span>
+          <p class="reconoc-card__motivo">"Cero pedidos con retraso durante el mes. ¡Récord personal!"</p>
+          <div class="reconoc-card__likes">
+            <button class="btn-like">❤️ <span>15</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Ideas -->
+    <section class="dash-section" id="ideas">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">💡</span> Ideas que Mejoran</h2>
+        <button class="btn-nuevo" id="btnEnviarIdea">+ Enviar mi idea</button>
+      </div>
+      <div class="idea-form-salon">
+        <textarea class="idea-textarea" id="ideaTextoDelivery" placeholder="¿Tienes una idea para mejorar el delivery? Ej: Usar bolsas isotérmicas para mantener la temperatura de las alitas..." rows="4" maxlength="300"></textarea>
+        <div class="idea-form-footer">
+          <span class="idea-char-count"><span id="ideaCharCount">0</span>/300</span>
+          <button class="btn-enviar-idea" id="btnSubmitIdea">Enviar propuesta 💡</button>
+        </div>
+      </div>
+      <div class="ideas-lista">
+        <div class="idea-item idea-item--aprobada">
+          <div class="idea-item__header">
+            <span class="idea-status status--aprobada">✅ Aprobada</span>
+            <span class="idea-fecha">15 Jun 2026</span>
+          </div>
+          <p class="idea-texto">"Implementar un sistema de confirmación de pedido por WhatsApp para reducir llamadas erróneas."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Encuesta -->
+    <section class="dash-section dash-section--alt" id="encuesta">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-emoji">📊</span> Encuesta del Trimestre</h2>
+        <span class="section-badge encuesta-badge--activa">🟢 Activa hasta 30 Jun</span>
+      </div>
+      <div class="encuesta-form-card">
+        <div class="encuesta-pregunta">
+          <label class="encuesta-pregunta__label">1. ¿La comunicación interna es clara para tu área?</label>
+          <div class="encuesta-stars" data-pregunta="1">
+            <button class="star-btn" data-val="1">★</button>
+            <button class="star-btn" data-val="2">★</button>
+            <button class="star-btn" data-val="3">★</button>
+            <button class="star-btn" data-val="4">★</button>
+            <button class="star-btn" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="encuesta-pregunta">
+          <label class="encuesta-pregunta__label">2. ¿Te sientes valorado/a por el equipo de Papeo's?</label>
+          <div class="encuesta-stars" data-pregunta="2">
+            <button class="star-btn" data-val="1">★</button>
+            <button class="star-btn" data-val="2">★</button>
+            <button class="star-btn" data-val="3">★</button>
+            <button class="star-btn" data-val="4">★</button>
+            <button class="star-btn" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="encuesta-pregunta">
+          <label class="encuesta-pregunta__label">3. ¿Cuentas con los equipos necesarios para tu trabajo?</label>
+          <div class="encuesta-stars" data-pregunta="3">
+            <button class="star-btn" data-val="1">★</button>
+            <button class="star-btn" data-val="2">★</button>
+            <button class="star-btn" data-val="3">★</button>
+            <button class="star-btn" data-val="4">★</button>
+            <button class="star-btn" data-val="5">★</button>
+          </div>
+        </div>
+        <textarea class="idea-textarea" placeholder="Tu opinión es confidencial..." rows="3" maxlength="200"></textarea>
+        <button class="btn-enviar-encuesta" id="btnEnviarEncuestaDelivery">Enviar respuesta 📊</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="dash-footer">
+    <div class="footer-inner">
+      <img src="assets/images/logo.png" alt="Logo Papeo's" class="footer-logo" />
+      <p>© 2026 Papeo's Rímac · Intranet Corporativa</p>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+  <script src="js/dashboard-delivery.js"></script>
+</body>
+</html>

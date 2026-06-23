@@ -1,0 +1,588 @@
+/* ============================================================
+   PAPEO'S RÍMAC — dashboard-jefa.css
+   Panel de Jefatura · Verde oscuro + dorado
+   ============================================================ */
+
+/* ── BODY ── */
+.dash-jefa-body {
+  background: var(--gris-100);
+}
+
+/* ── NAVBAR override de jefa ── */
+.navbar--jefa {
+  background: linear-gradient(90deg, var(--verde-oscuro) 0%, #1A4D1E 100%);
+  border-bottom-color: var(--amarillo);
+}
+
+/* ============================================================
+   HERO DE JEFATURA
+   ============================================================ */
+.hero-jefa {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-top: var(--navbar-h);
+}
+
+.hero-jefa__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-jefa__bgimg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.6) saturate(1.2);
+}
+
+.hero-jefa__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(27,94,32,0.88) 0%,
+    rgba(0,0,0,0.5) 60%,
+    rgba(27,94,32,0.75) 100%
+  );
+}
+
+.hero-jefa__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--sp-3xl) var(--sp-xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: hero-content-in 0.7s ease both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Brillo dorado en el título de la jefa */
+.hero-jefa__content .hero-title {
+  text-shadow: 0 2px 20px rgba(253,216,53,0.3), 0 4px 30px rgba(0,0,0,0.4);
+}
+
+.hero-jefa__content .hero-title span {
+  color: var(--amarillo);
+}
+
+/* KPI especial para jefa — fondo verde oscuro con borde dorado */
+.hero-jefa__content .kpi-card {
+  background: rgba(27,94,32,0.6);
+  border: 1px solid rgba(253,216,53,0.4);
+}
+
+.hero-jefa__content .kpi-card:hover {
+  background: rgba(27,94,32,0.8);
+  border-color: var(--amarillo);
+}
+
+/* ============================================================
+   CORONA DECORATIVA — solo jefa
+   ============================================================ */
+.hero-jefa__content::before {
+  content: '👑';
+  position: absolute;
+  top: var(--sp-2xl);
+  right: var(--sp-xl);
+  font-size: 4rem;
+  opacity: 0.18;
+  animation: corona-float 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes corona-float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50%       { transform: translateY(-12px) rotate(8deg); }
+}
+
+/* ============================================================
+   SECCIÓN DE COMUNICADOS — estilo jefa
+   ============================================================ */
+/* Hereda de global, solo ajuste de color de acento */
+.dash-jefa-body .comunicado-card {
+  border-left-color: var(--verde-base);
+}
+
+.dash-jefa-body .comunicado-card--importante {
+  border-left-color: var(--rojo);
+  background: linear-gradient(135deg, var(--blanco) 85%, #FFF5F5 100%);
+}
+
+/* ============================================================
+   GESTIÓN DE IDEAS — solo jefa tiene botones de acción
+   ============================================================ */
+.dash-jefa-body .ideas-lista .idea-item {
+  transition: all var(--trans-base);
+}
+
+.dash-jefa-body .ideas-lista .idea-item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
+   TARJETAS DE RECONOCIMIENTO — jefa
+   ============================================================ */
+.dash-jefa-body .reconoc-card {
+  background: linear-gradient(160deg, var(--blanco) 70%, var(--verde-mint) 100%);
+}
+
+.dash-jefa-body .reconoc-card:nth-child(1)::before {
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+}
+
+.dash-jefa-body .reconoc-card:nth-child(2)::before {
+  background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+}
+
+.dash-jefa-body .reconoc-card:nth-child(3)::before {
+  background: linear-gradient(90deg, #CD7F32, #8B4513);
+}
+
+/* ============================================================
+   HORARIOS — tabla extendida solo jefa
+   ============================================================ */
+.horarios-tabla tbody tr:nth-child(even) td {
+  background: var(--verde-mint);
+}
+
+.horarios-tabla tbody tr:hover td {
+  background: rgba(76,175,80,0.12);
+}
+
+/* ============================================================
+   ENCUESTAS — resultados con colores por categoría
+   ============================================================ */
+.dash-jefa-body .encuestas-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.dash-jefa-body .encuesta-resultado-card:nth-child(1) .encuesta-rc-title {
+  color: var(--verde-oscuro);
+}
+
+.dash-jefa-body .encuesta-resultado-card:nth-child(2) .encuesta-rc-title {
+  color: #E65100;
+}
+
+.dash-jefa-body .encuesta-resultado-card:nth-child(3) .encuesta-rc-title {
+  color: #4A148C;
+}
+
+.dash-jefa-body .encuesta-resultado-card:nth-child(4) .encuesta-rc-title {
+  color: #1565C0;
+}
+
+/* ============================================================
+   DIRECTORIO DEL EQUIPO — solo jefa
+   ============================================================ */
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--sp-md);
+}
+
+/* Hover con acento dorado para jefa */
+.dash-jefa-body .equipo-card:hover {
+  border: 1.5px solid var(--amarillo);
+}
+
+/* ============================================================
+   BANNER INFERIOR DE JEFA — frase motivadora
+   ============================================================ */
+.jefa-motivacion {
+  background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde-base) 100%);
+  color: var(--blanco);
+  text-align: center;
+  padding: var(--sp-2xl) var(--sp-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.jefa-motivacion::before {
+  content: '🍗';
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  opacity: 0.12;
+}
+
+.jefa-motivacion::after {
+  content: '🏆';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  opacity: 0.12;
+}
+
+.jefa-motivacion__texto {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  opacity: 0.92;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   GESTIÓN DE CONTENIDO — solo jefa
+   ============================================================ */
+.section-desc-inline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(253,216,53,0.18);
+  color: var(--verde-oscuro);
+  border: 1px solid rgba(253,216,53,0.4);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Tabs de tipo de contenido */
+.contenido-tabs {
+  display: flex;
+  gap: var(--sp-xs);
+  margin-bottom: var(--sp-lg);
+  flex-wrap: wrap;
+}
+
+.contenido-tab {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  color: var(--gris-700);
+  background: var(--gris-200);
+  border: 2px solid transparent;
+  transition: all var(--trans-fast);
+  cursor: pointer;
+}
+
+.contenido-tab--active {
+  background: var(--verde-base);
+  color: var(--blanco);
+  border-color: var(--verde-oscuro);
+  box-shadow: var(--shadow-sm);
+}
+
+.contenido-tab:hover:not(.contenido-tab--active) {
+  background: var(--verde-mint);
+  color: var(--verde-oscuro);
+}
+
+/* Paneles de contenido */
+.contenido-panel {
+  background: var(--blanco);
+  border-radius: var(--radius-md);
+  padding: var(--sp-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--gris-200);
+  margin-bottom: var(--sp-xl);
+  animation: card-in 0.3s ease both;
+}
+
+/* Área de upload drag & drop */
+.upload-area {
+  border: 2.5px dashed var(--verde-claro);
+  border-radius: var(--radius-md);
+  padding: var(--sp-2xl) var(--sp-xl);
+  text-align: center;
+  background: var(--verde-mint);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  position: relative;
+  margin-bottom: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+  border-color: var(--verde-base);
+  background: #C8E6C9;
+  transform: scale(1.01);
+}
+
+.upload-area__icon { font-size: 2.8rem; line-height: 1; }
+.upload-area__texto { font-size: 0.95rem; font-weight: 600; color: var(--verde-oscuro); }
+.upload-area__sub   { font-size: 0.78rem; color: var(--gris-500); }
+
+.upload-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-upload-select {
+  background: var(--verde-base);
+  color: var(--blanco);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  transition: all var(--trans-fast);
+  position: relative;
+  z-index: 1;
+  pointer-events: none; /* el input cubre todo el área */
+}
+
+/* Preview de video */
+.upload-preview {
+  position: relative;
+  margin-bottom: var(--sp-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--negro);
+  box-shadow: var(--shadow-md);
+}
+
+.upload-preview__video {
+  width: 100%;
+  max-height: 280px;
+  display: block;
+}
+
+.upload-preview__info {
+  padding: var(--sp-sm) var(--sp-md);
+  background: rgba(0,0,0,0.6);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.8rem;
+  display: flex;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.btn-quitar-video {
+  position: absolute;
+  top: var(--sp-sm);
+  right: var(--sp-sm);
+  background: rgba(198,40,40,0.85);
+  color: var(--blanco);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  transition: background var(--trans-fast);
+  backdrop-filter: blur(4px);
+}
+
+.btn-quitar-video:hover { background: var(--rojo); }
+
+/* Formulario de contenido */
+.contenido-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.modal-input,
+.modal-select,
+.modal-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  border: 1.5px solid var(--gris-300);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: var(--gris-100);
+  color: var(--gris-900);
+  transition: border-color var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.modal-input:focus,
+.modal-select:focus,
+.modal-textarea:focus {
+  outline: none;
+  border-color: var(--verde-base);
+  box-shadow: 0 0 0 3px rgba(56,142,60,0.15);
+  background: var(--blanco);
+}
+
+.modal-textarea { resize: vertical; }
+
+.required { color: var(--rojo); font-weight: 700; }
+
+/* Link input con ícono */
+.link-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.link-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.link-input { padding-left: 38px; }
+
+.input-hint {
+  font-size: 0.72rem;
+  color: var(--gris-500);
+  margin-top: -8px;
+}
+
+/* Banner info encuesta */
+.encuesta-info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-sm);
+  background: #E3F2FD;
+  border: 1px solid #90CAF9;
+  border-radius: var(--radius-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  font-size: 0.85rem;
+  color: #1565C0;
+}
+
+.encuesta-info-banner span { font-size: 1.2rem; flex-shrink: 0; }
+.encuesta-info-banner strong { color: #0D47A1; }
+
+/* Botones publicar */
+.btn-publicar {
+  background: linear-gradient(135deg, var(--verde-base), var(--verde-oscuro));
+  color: var(--blanco);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  align-self: flex-start;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-publicar:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-publicar--encuesta {
+  background: linear-gradient(135deg, #1565C0, #0D47A1);
+}
+
+.btn-publicar--link {
+  background: linear-gradient(135deg, #6A1B9A, #4A148C);
+}
+
+/* Lista de contenido publicado */
+.contenido-publicado {
+  margin-top: var(--sp-xl);
+}
+
+.contenido-publicado__titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--verde-oscuro);
+  margin-bottom: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.publicado-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.publicado-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  background: var(--blanco);
+  border: 1.5px solid var(--gris-200);
+  border-radius: var(--radius-md);
+  padding: var(--sp-sm) var(--sp-md);
+  transition: all var(--trans-base);
+}
+
+.publicado-item:hover {
+  border-color: var(--verde-claro);
+  box-shadow: var(--shadow-sm);
+}
+
+.publicado-item--video   { border-left: 4px solid var(--verde-base); }
+.publicado-item--encuesta { border-left: 4px solid #1565C0; }
+.publicado-item--link     { border-left: 4px solid #6A1B9A; }
+
+.publicado-item__icon { font-size: 1.6rem; flex-shrink: 0; }
+
+.publicado-item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.publicado-item__info strong {
+  font-size: 0.88rem;
+  color: var(--gris-900);
+}
+
+.publicado-item__info small {
+  font-size: 0.72rem;
+  color: var(--gris-500);
+}
+
+.publicado-area { font-size: 0.68rem; }
+
+.publicado-item__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  flex-shrink: 0;
+}
+
+.publicado-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.publicado-tag--video    { background: var(--verde-mint); color: var(--verde-oscuro); }
+.publicado-tag--encuesta { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+.publicado-tag--link     { background: #EDE7F6; color: #4A148C; }
+
+.btn-eliminar-publicado {
+  color: var(--gris-500);
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--trans-fast);
+  line-height: 1;
+}
+
+.btn-eliminar-publicado:hover {
+  color: var(--rojo);
+  background: #FFEBEE;
+}
+
+/* ============================================================
+   FOOTER — jefa
+   ============================================================ */
+.dash-jefa-body .dash-footer {
+  background: linear-gradient(90deg, var(--verde-oscuro) 0%, #0D3B10 100%);
+  border-top-color: var(--amarillo);
+}

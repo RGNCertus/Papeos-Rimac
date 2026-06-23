@@ -1,0 +1,124 @@
+/* ============================================================
+   PAPEO'S RÍMAC — dashboard-salon.css
+   Panel de Salón · Verde vivo + blanco cálido
+   ============================================================ */
+
+.dash-salon-body {
+  background: #F1F8E9;
+}
+
+/* ── NAVBAR Salón ── */
+.navbar--salon {
+  background: linear-gradient(90deg, var(--verde-medio) 0%, var(--verde-base) 100%);
+  border-bottom-color: #AED581;
+}
+
+/* ============================================================
+   HERO DE SALÓN
+   ============================================================ */
+.hero-salon {
+  margin-top: var(--navbar-h);
+  min-height: 380px;
+  background: linear-gradient(
+    135deg,
+    var(--verde-oscuro) 0%,
+    var(--verde-base) 50%,
+    #558B2F 100%
+  );
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Patrón de fondo decorativo */
+.hero-salon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(253,216,53,0.08) 0%, transparent 40%);
+}
+
+/* Iconos flotantes */
+.hero-salon__deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-salon__floating-icons {
+  position: absolute;
+  inset: 0;
+}
+
+.float-icon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.12;
+  animation: float-up var(--delay, 0s) ease-in-out infinite;
+  bottom: -40px;
+}
+
+.float-icon:nth-child(1) { left: 8%; animation: floating 4s ease-in-out var(--delay) infinite; }
+.float-icon:nth-child(2) { left: 22%; animation: floating 5s ease-in-out var(--delay) infinite; }
+.float-icon:nth-child(3) { left: 45%; animation: floating 3.5s ease-in-out var(--delay) infinite; }
+.float-icon:nth-child(4) { left: 68%; animation: floating 4.5s ease-in-out var(--delay) infinite; }
+.float-icon:nth-child(5) { left: 85%; animation: floating 5.5s ease-in-out var(--delay) infinite; }
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.12; }
+  50%       { transform: translateY(-20px) rotate(8deg); opacity: 0.22; }
+}
+
+.hero-salon__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--sp-3xl) var(--sp-xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: hero-content-in 0.7s ease both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-salon__content .kpi-card {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* ── Acento verde claro para salón ── */
+.dash-salon-body .section-title { color: var(--verde-medio); }
+.dash-salon-body .encuesta-rc-title { color: var(--verde-medio); }
+
+/* ── Comunicados con acento salón ── */
+.dash-salon-body .comunicado-card { border-left-color: var(--verde-claro); }
+.dash-salon-body .comunicado-card--importante { border-left-color: var(--rojo); }
+
+/* ── Reconoc destacado salón ── */
+.reconoc-card--highlight {
+  background: linear-gradient(160deg, var(--blanco) 60%, #F1F8E9 100%);
+  box-shadow: 0 8px 28px rgba(46,125,50,0.2);
+}
+
+/* ── Alt sections ── */
+.dash-salon-body .dash-section--alt {
+  background: #F9FBE7;
+}
+
+/* ── Botón enviar idea salón ── */
+.dash-salon-body .btn-enviar-encuesta {
+  background: linear-gradient(135deg, var(--verde-base), var(--verde-medio));
+}
+
+/* ── Hora actual destacada ── */
+#horaActual {
+  font-family: var(--font-display);
+  letter-spacing: -1px;
+}

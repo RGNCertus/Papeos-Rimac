@@ -1,0 +1,359 @@
+/* ============================================================
+   PAPEO'S RÍMAC — dashboard-cocina.css
+   Panel de Cocina · Rojo fuego + negro carbón + verde
+   ============================================================ */
+
+.dash-cocina-body {
+  background: #1A0800;
+}
+
+.dash-cocina-body .dash-section {
+  background: #1A0800;
+}
+
+.dash-cocina-body .dash-section--alt {
+  background: #220A00;
+}
+
+.dash-cocina-body .section-title {
+  color: #FF8A65;
+}
+
+.dash-cocina-body .section-desc {
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── NAVBAR Cocina ── */
+.navbar--cocina {
+  background: linear-gradient(90deg, #1A0800 0%, #BF360C 100%);
+  border-bottom-color: var(--amarillo);
+}
+
+/* ============================================================
+   HERO DE COCINA — fuego y calor
+   ============================================================ */
+.hero-cocina {
+  margin-top: var(--navbar-h);
+  min-height: 400px;
+  background: linear-gradient(
+    135deg,
+    #0D0300 0%,
+    #4E1100 35%,
+    #BF360C 70%,
+    #1B5E20 100%
+  );
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cocina::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 90%, rgba(255,87,34,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 10%, rgba(27,94,32,0.25) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(253,216,53,0.05) 0%, transparent 50%);
+  animation: calor-cocina 5s ease-in-out infinite alternate;
+}
+
+@keyframes calor-cocina {
+  from { opacity: 0.8; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1.02); }
+}
+
+/* Llamas decorativas */
+.cocina-flames {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flame {
+  position: absolute;
+  left: var(--x, 50%);
+  bottom: -10px;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  opacity: 0;
+  animation: llama-sube 2.5s ease-in var(--delay, 0s) infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes llama-sube {
+  0%   { opacity: 0; transform: translateY(0) scaleY(1) rotate(-5deg); }
+  15%  { opacity: 0.7; }
+  50%  { opacity: 0.5; transform: translateY(-40px) scaleY(1.3) rotate(5deg); }
+  80%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-80px) scaleY(0.8) rotate(-3deg); }
+}
+
+.hero-cocina__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--sp-3xl) var(--sp-xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: hero-content-in 0.7s ease both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-cocina__content .hero-eyebrow {
+  color: #FF8A65;
+}
+
+.hero-cocina__content .kpi-card {
+  background: rgba(191,54,12,0.35);
+  border-color: rgba(255,138,101,0.35);
+}
+
+.hero-cocina__content .kpi-card:hover {
+  background: rgba(191,54,12,0.55);
+  border-color: rgba(255,138,101,0.6);
+}
+
+/* ============================================================
+   MENÚ DEL DÍA — sección exclusiva cocina
+   ============================================================ */
+.menu-cocina-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+}
+
+.menu-categoria {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,138,101,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md) var(--sp-lg);
+  transition: border-color var(--trans-base);
+}
+
+.menu-categoria:hover {
+  border-color: rgba(255,138,101,0.4);
+}
+
+.menu-categoria__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FF8A65;
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-xs);
+  border-bottom: 1px solid rgba(255,138,101,0.2);
+}
+
+.menu-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--sp-sm);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  gap: var(--sp-sm);
+  transition: background var(--trans-fast);
+}
+
+.menu-item--disponible {
+  background: rgba(76,175,80,0.1);
+  border: 1px solid rgba(76,175,80,0.2);
+}
+
+.menu-item--disponible:hover {
+  background: rgba(76,175,80,0.18);
+}
+
+.menu-item--limitado {
+  background: rgba(255,193,7,0.1);
+  border: 1px solid rgba(255,193,7,0.25);
+}
+
+.menu-item--agotado {
+  background: rgba(198,40,40,0.1);
+  border: 1px solid rgba(198,40,40,0.2);
+  opacity: 0.7;
+}
+
+.menu-item__nombre {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  flex: 1;
+}
+
+.menu-item__estado {
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.estado--ok    { color: #A5D6A7; }
+.estado--bajo  { color: #FFD54F; }
+.estado--agotado { color: #EF9A9A; }
+
+/* Alerta de menú */
+.menu-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+  background: rgba(255,193,7,0.12);
+  border: 1px solid rgba(255,193,7,0.3);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  font-size: 0.82rem;
+  color: #FFD54F;
+  line-height: 1.5;
+}
+
+.menu-alerta span { font-size: 1.1rem; flex-shrink: 0; }
+.menu-alerta strong { color: #FFE082; }
+
+/* ============================================================
+   OVERRIDE OSCURO — Cocina (mismo patrón que Bar)
+   ============================================================ */
+.dash-cocina-body .comunicado-card {
+  background: rgba(255,255,255,0.05);
+  border-left-color: #FF8A65;
+  box-shadow: none;
+}
+
+.dash-cocina-body .comunicado-card--importante {
+  border-left-color: #EF9A9A;
+  background: rgba(198,40,40,0.08);
+}
+
+.dash-cocina-body .comunicado-card__title { color: rgba(255,255,255,0.9); }
+.dash-cocina-body .comunicado-card__body  { color: rgba(255,255,255,0.6); }
+.dash-cocina-body .comunicado-fecha       { color: rgba(255,255,255,0.38); }
+
+.dash-cocina-body .btn-leer-mas      { color: #FF8A65; }
+.dash-cocina-body .btn-leer-mas:hover { color: var(--amarillo); }
+
+/* Reconocimientos cocina */
+.dash-cocina-body .reconoc-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,138,101,0.2);
+  box-shadow: none;
+}
+
+.dash-cocina-body .reconoc-card::before {
+  background: linear-gradient(90deg, var(--amarillo), #FF5722);
+}
+
+.dash-cocina-body .reconoc-card__nombre { color: var(--blanco); }
+.dash-cocina-body .reconoc-card__motivo { color: rgba(255,255,255,0.62); }
+
+.dash-cocina-body .reconoc-card:hover {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(191,54,12,0.4);
+}
+
+/* Ideas cocina */
+.dash-cocina-body .idea-form-salon {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,138,101,0.22);
+}
+
+.dash-cocina-body .idea-textarea {
+  background: rgba(0,0,0,0.35);
+  border-color: rgba(255,138,101,0.3);
+  color: rgba(255,255,255,0.85);
+}
+
+.dash-cocina-body .idea-textarea::placeholder { color: rgba(255,255,255,0.28); }
+
+.dash-cocina-body .idea-textarea:focus {
+  border-color: #FF8A65;
+  box-shadow: 0 0 0 3px rgba(255,138,101,0.15);
+}
+
+.dash-cocina-body .idea-char-count { color: rgba(255,255,255,0.38); }
+
+.dash-cocina-body .idea-item {
+  background: rgba(255,255,255,0.05);
+  border-left-color: rgba(255,138,101,0.5);
+}
+
+.dash-cocina-body .idea-item--aprobada { border-left-color: var(--verde-claro); }
+.dash-cocina-body .idea-texto { color: rgba(255,255,255,0.65); }
+
+/* Encuesta cocina */
+.dash-cocina-body .encuesta-form-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,138,101,0.22);
+}
+
+.dash-cocina-body .encuesta-pregunta__label { color: rgba(255,255,255,0.85); }
+.dash-cocina-body .star-btn { color: rgba(255,255,255,0.18); }
+.dash-cocina-body .star-btn:hover,
+.dash-cocina-body .star-btn.active { color: var(--amarillo); }
+
+.dash-cocina-body .btn-enviar-encuesta {
+  background: linear-gradient(135deg, #D84315, #BF360C);
+}
+
+.dash-cocina-body .btn-enviar-encuesta:hover {
+  background: linear-gradient(135deg, #E64A19, #D84315);
+}
+
+/* Turno cocina */
+.dash-cocina-body .turno-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,138,101,0.2);
+}
+
+.dash-cocina-body .turno-info__horario  { color: #FF8A65; }
+.dash-cocina-body .turno-info__label    { color: rgba(255,255,255,0.42); }
+.dash-cocina-body .turno-semana h4      { color: rgba(255,255,255,0.48); }
+.dash-cocina-body .dia-nombre           { color: rgba(255,255,255,0.38); }
+.dash-cocina-body .dia-item--hoy .dia-nombre { color: #FF8A65; }
+
+.dash-cocina-body .compa-chip {
+  background: rgba(255,138,101,0.15);
+  color: #FF8A65;
+  border-color: rgba(255,138,101,0.3);
+}
+
+/* Btn nuevo */
+.dash-cocina-body .btn-nuevo {
+  background: rgba(191,54,12,0.6);
+  border: 1px solid rgba(255,138,101,0.4);
+}
+
+.dash-cocina-body .btn-nuevo:hover { background: #BF360C; }
+
+/* Section badge */
+.dash-cocina-body .section-badge {
+  background: rgba(255,138,101,0.2);
+  color: #FF8A65;
+}
+
+.dash-cocina-body .encuesta-badge--activa {
+  background: rgba(76,175,80,0.25);
+  color: var(--verde-claro);
+}
+
+/* Footer cocina */
+.dash-cocina-body .dash-footer {
+  background: linear-gradient(90deg, #0D0300, #1A0800);
+  border-top-color: var(--amarillo);
+}
+
+/* Scrollbar */
+.dash-cocina-body ::-webkit-scrollbar-thumb { background: #BF360C; }
+.dash-cocina-body ::-webkit-scrollbar-thumb:hover { background: #D84315; }
