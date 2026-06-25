@@ -21,6 +21,11 @@
 
         <h1>Capacitación de la Intranet</h1>
 
+    <div class="bienvenida-cap">
+        👋 Bienvenido a la capacitación oficial de la Intranet Papeo's Rímac.
+        Completa el recorrido y demuestra tus conocimientos.
+    </div>
+
         <p>
             Aprende rápidamente cómo utilizar las herramientas internas
             de Papeo's Rímac.
@@ -43,7 +48,17 @@
     </section>
 
     <section class="cap-card">
-        <h2>📝 Preguntas rápidas</h2>
+
+        <h2>📝 Evaluación rápida</h2>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <p class="score-text">
+            Puntuación:
+            <strong id="score">0</strong>/3
+        </p>
 
         <div class="quiz">
 
@@ -69,6 +84,7 @@
             </div>
 
         </div>
+
     </section>
 
     <section class="cap-card">
@@ -89,6 +105,60 @@
             <li>Consulta a tu encargada si tienes dudas.</li>
         </ul>
     </section>
+
+    <section class="cap-card">
+
+        <h2>📋 Checklist del primer día</h2>
+
+        <div class="checklist">
+
+            <label>
+                <input type="checkbox">
+                Aprendí cómo iniciar sesión.
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Aprendí cómo cerrar sesión.
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Vi el video de capacitación.
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Respondí las preguntas.
+            </label>
+
+        </div>
+
+    </section>
+
+    
+</div>
+
+<div class="certificado" id="certificado">
+
+    <div class="certificado-card">
+
+        <div class="certificado-icon">
+            🏆
+        </div>
+
+        <h2>¡Capacitación completada!</h2>
+
+        <p>
+            Has finalizado correctamente la capacitación
+            de la intranet de Papeo's Rímac.
+        </p>
+
+        <button onclick="cerrarCertificado()">
+            Continuar
+        </button>
+
+    </div>
 
 </div>
 
