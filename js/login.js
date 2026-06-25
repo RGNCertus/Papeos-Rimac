@@ -32,6 +32,11 @@ const loginBlocked  = document.getElementById('loginBlocked');
 const loginAttempts = document.getElementById('loginAttempts');
 const attemptsCount = document.getElementById('attemptsCount');
 const countdownEl   = document.getElementById('countdownTimer');
+const btnCapacitacion = document.getElementById('btnCapacitacion');
+
+btnCapacitacion.addEventListener('click', () => {
+  window.location.href = 'capacitacion.html';
+});
 
 /* ============================================================
    MOSTRAR / OCULTAR CONTRASEÑA
