@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Papeo's | Capacitación</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/capacitacion.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="capacitacion-body">
+
+<div class="capacitacion-container">
+
+    <div class="capacitacion-header">
+        <div class="header-icon">🎓</div>
+
+        <h1>Capacitación de la Intranet</h1>
+
+        <p>
+            Aprende rápidamente cómo utilizar las herramientas internas
+            de Papeo's Rímac.
+        </p>
+
+        <button class="btn-volver" id="btnVolver">
+            ← Volver al Login
+        </button>
+    </div>
+
+    <section class="cap-card">
+        <h2>📌 ¿Qué encontrarás en la intranet?</h2>
+
+        <ul>
+            <li>Acceso por área de trabajo.</li>
+            <li>Información interna del restaurante.</li>
+            <li>Capacitaciones y documentos.</li>
+            <li>Herramientas para mejorar la comunicación.</li>
+        </ul>
+    </section>
+
+    <section class="cap-card">
+        <h2>📝 Preguntas rápidas</h2>
+
+        <div class="quiz">
+
+            <div class="question">
+                <p>1. ¿Debes compartir tu contraseña con otros trabajadores?</p>
+
+                <button onclick="respuesta(this,false)">Sí</button>
+                <button onclick="respuesta(this,true)">No</button>
+            </div>
+
+            <div class="question">
+                <p>2. ¿La intranet sirve para consultar información interna?</p>
+
+                <button onclick="respuesta(this,true)">Sí</button>
+                <button onclick="respuesta(this,false)">No</button>
+            </div>
+
+            <div class="question">
+                <p>3. ¿Debes cerrar sesión al terminar tu turno?</p>
+
+                <button onclick="respuesta(this,true)">Sí</button>
+                <button onclick="respuesta(this,false)">No</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cap-card">
+        <h2>🎥 Video de capacitación</h2>
+
+        <video controls class="video-capacitacion">
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <section class="cap-card">
+        <h2>⭐ Recomendaciones</h2>
+
+        <ul>
+            <li>Usa siempre tu usuario asignado.</li>
+            <li>No compartas credenciales.</li>
+            <li>Mantén la información actualizada.</li>
+            <li>Consulta a tu encargada si tienes dudas.</li>
+        </ul>
+    </section>
+
+</div>
+
+<script src="js/capacitacion.js"></script>
+
+</body>
+</html>
