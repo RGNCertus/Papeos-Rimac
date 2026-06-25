@@ -1,0 +1,156 @@
+.capacitacion-body{
+    background: linear-gradient(
+        135deg,
+        #1B5E20,
+        #388E3C
+    );
+
+    font-family: 'Poppins', sans-serif;
+    min-height:100vh;
+    padding:40px 20px;
+}
+
+.capacitacion-container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.capacitacion-header{
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+
+    animation:slideDown .8s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.header-icon{
+    font-size:4rem;
+    animation:float 3s infinite;
+}
+
+.cap-card{
+    background:white;
+
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+    animation:fadeUp .8s ease;
+}
+
+.cap-card h2{
+    color:#1B5E20;
+    margin-bottom:15px;
+}
+
+.cap-card ul{
+    padding-left:20px;
+}
+
+.quiz{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.question{
+    background:#f6f6f6;
+    padding:20px;
+    border-radius:15px;
+}
+
+.question button{
+    margin-right:10px;
+    margin-top:10px;
+
+    background:#388E3C;
+    color:white;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.question button:hover{
+    transform:translateY(-2px);
+}
+
+.correcta{
+    background:#4CAF50 !important;
+}
+
+.incorrecta{
+    background:#E53935 !important;
+}
+
+.video-capacitacion{
+    width:100%;
+    border-radius:15px;
+}
+
+.btn-volver{
+    margin-top:20px;
+
+    background:#1B5E20;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.btn-volver:hover{
+    transform:translateY(-3px);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
